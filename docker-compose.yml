@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  app:
+    container_name: app
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: 'postgres:11.15-alpine'
+    container_name: dba
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=auction
+      - POSTGRES_USER=auction
+      - POSTGRES_DB=auction
